@@ -16,7 +16,6 @@ namespace DataAccessLayer.Entities.Base
         public ObjectId ObjectId { get; set; }
 
 
-        [BsonId]
         [BsonRepresentation(BsonType.DateTime)]
         [BsonElement(Order = 100)]
         public DateTime CreatedDate { get; set; } = DateTime.Now;

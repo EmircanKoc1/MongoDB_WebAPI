@@ -1,4 +1,6 @@
 using DataAccessLayer.Context;
+using DataAccessLayer.Repositories.Abstract;
+using DataAccessLayer.Repositories.Concretes;
 
 namespace MongoDB_WebAPI
 {
@@ -8,19 +10,19 @@ namespace MongoDB_WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddSingleton<MongoDBContext>(c => new MongoDBContext(builder.Configuration));
 
+            builder.Services.AddScoped<IUserMongoRepository,UserMongoRepository>();
+            builder.Services.AddScoped<IProductMongoRepository,ProductMongoRepository>();
+
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

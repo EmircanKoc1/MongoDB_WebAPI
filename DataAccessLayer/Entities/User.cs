@@ -7,20 +7,21 @@ namespace DataAccessLayer.Entities
     public class User : BaseEntity
     {
         [BsonElement(Order = 2)]
+        [BsonRepresentation(BsonType.String)]
         public string UserName { get; set; }
 
+        [BsonRepresentation(BsonType.String)]
         [BsonElement(Order = 3)]
         public string Name { get; set; }
 
+        [BsonRepresentation(BsonType.String)]
         [BsonElement(Order = 4)]
         public string Surname { get; set; }
 
         [BsonElement(Order = 5)]
-        [BsonRepresentation(BsonType.Document)]
         public Contact Contact { get; set; }
 
         [BsonElement(Order = 6)]
-        [BsonRepresentation(BsonType.Document)]
         public ICollection<Address> Addresses { get; set; }
     }
 }

@@ -60,6 +60,14 @@ namespace DataAccessLayer.Repositories.Concretes.Base
 
         public async Task<T> UpdateOneAsync(Expression<Func<T, bool>> filter, T entity)
         {
+
+            var foundedEntiy = await (await _collection.FindAsync(filter)).FirstOrDefaultAsync();
+
+            if (foundedEntiy is not null)
+                entity.ObjectId = foundedEntiy.ObjectId;
+            else
+                throw new Exception("lankldnlkqandklansdln");
+
             var result = await _collection.FindOneAndReplaceAsync(
                 filter: filter,
                 replacement: entity);
