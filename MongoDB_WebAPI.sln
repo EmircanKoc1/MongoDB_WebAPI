@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDB_WebAPI", "MongoDB_WebAPI\MongoDB_WebAPI.csproj", "{995D7A6F-F997-4313-BADB-4870F01AAD13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.API", "MongoDB_WebAPI\Presentation.API.csproj", "{995D7A6F-F997-4313-BADB-4870F01AAD13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{2FBD88F6-87B2-408D-9B4C-CCD3ADCA55A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{2FBD88F6-87B2-408D-9B4C-CCD3ADCA55A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{954FBD78-2E47-4291-B91D-84709B4BE460}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{954FBD78-2E47-4291-B91D-84709B4BE460}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{E010F162-88C5-4FD0-A0C9-8D661ED075CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{954FBD78-2E47-4291-B91D-84709B4BE460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{954FBD78-2E47-4291-B91D-84709B4BE460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{954FBD78-2E47-4291-B91D-84709B4BE460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E010F162-88C5-4FD0-A0C9-8D661ED075CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E010F162-88C5-4FD0-A0C9-8D661ED075CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E010F162-88C5-4FD0-A0C9-8D661ED075CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E010F162-88C5-4FD0-A0C9-8D661ED075CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

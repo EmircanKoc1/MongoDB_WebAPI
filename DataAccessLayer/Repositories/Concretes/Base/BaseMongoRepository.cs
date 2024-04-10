@@ -14,18 +14,14 @@ namespace DataAccessLayer.Repositories.Concretes.Base
         protected IMongoCollection<T> _collection => _context.GetCollection<T>();
 
         public BaseMongoRepository(MongoDBContext context)
-        => _context = context;
+           => _context = context;
 
         public async Task AddAsync(T entity)
-        => await _collection.InsertOneAsync(entity);
+           => await _collection.InsertOneAsync(entity);
 
 
         public async Task<T> DeleteAsync(Expression<Func<T, bool>> filter)
-        {
-            var result = await _collection.FindOneAndDeleteAsync(filter);
-
-            return result;
-        }
+           => await _collection.FindOneAndDeleteAsync(filter);
 
         public async Task<IEnumerable<T>> DeleteManyAsync(Expression<Func<T, bool>> filter)
         {
@@ -34,11 +30,9 @@ namespace DataAccessLayer.Repositories.Concretes.Base
             await _collection.DeleteManyAsync(filter);
 
             return foundedEntities;
-
         }
-
         public async Task<T> DeleteOneAsync(Expression<Func<T, bool>> filter)
-        => await _collection.FindOneAndDeleteAsync(filter);
+            => await _collection.FindOneAndDeleteAsync(filter);
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
@@ -48,33 +42,13 @@ namespace DataAccessLayer.Repositories.Concretes.Base
         }
 
         public async Task<T> GetByIdAsync(string id)
-        {
-            return await _collection.FindAsync(x => x.ObjectId == ObjectId.Parse(id)).Result.FirstOrDefaultAsync();
-        }
+            => await (await _collection.FindAsync(x => x.ObjectId == ObjectId.Parse(id))).FirstOrDefaultAsync();
 
         public async Task<T> GetByIdAsync(ObjectId id)
-        {
-            return await _collection.FindAsync(x => x.ObjectId == id).Result.FirstOrDefaultAsync();
-        }
-
+            => await (await _collection.FindAsync(x => x.ObjectId == id)).FirstOrDefaultAsync();
 
         public async Task<T> UpdateOneAsync(Expression<Func<T, bool>> filter, T entity)
-        {
-
-            var foundedEntiy = await (await _collection.FindAsync(filter)).FirstOrDefaultAsync();
-
-            if (foundedEntiy is not null)
-                entity.ObjectId = foundedEntiy.ObjectId;
-            else
-                throw new Exception("lankldnlkqandklansdln");
-
-            var result = await _collection.FindOneAndReplaceAsync(
-                filter: filter,
-                replacement: entity);
-
-
-            return result;
-        }
+            => await _collection.FindOneAndReplaceAsync(filter, entity);
 
         public async Task<long> UpdateManyAsync(FilterDefinition<T> filter, UpdateDefinition<T> update)
         {
@@ -82,5 +56,15 @@ namespace DataAccessLayer.Repositories.Concretes.Base
 
             return updateResult.ModifiedCount;
         }
+
+        public async Task<long> GetDocumentCount(Expression<Func<T, bool>> filter)
+            => await _collection.CountDocumentsAsync(filter);
+
+        public async Task<long> GetDocumentCount()
+            => await _collection.CountDocumentsAsync(Builders<T>.Filter.Empty);
+
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate)
+            => _collection.AsQueryable().Where(predicate).ToList();
+
     }
 }

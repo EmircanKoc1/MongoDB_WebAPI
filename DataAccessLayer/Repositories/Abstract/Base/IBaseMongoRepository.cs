@@ -9,5 +9,7 @@ namespace DataAccessLayer.Repositories.Abstract.Base
     {
         Task<T> GetByIdAsync(ObjectId id);
         Task<long> UpdateManyAsync(FilterDefinition<T> filter, UpdateDefinition<T> update);
+
+
     }
 }
