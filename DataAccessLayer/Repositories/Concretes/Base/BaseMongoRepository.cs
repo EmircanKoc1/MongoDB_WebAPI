@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Context;
 using DataAccessLayer.Entities.Base;
 using DataAccessLayer.Repositories.Abstract.Base;
+using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Linq.Expressions;
@@ -13,8 +14,8 @@ namespace DataAccessLayer.Repositories.Concretes.Base
         private readonly MongoDBContext _context;
         protected IMongoCollection<T> _collection => _context.GetCollection<T>();
 
-        public BaseMongoRepository(MongoDBContext context)
-           => _context = context;
+        public BaseMongoRepository(IOptions<Core.Models.SettingModels.MongoDB> options)
+           => _context = new MongoDBContext(options);
 
         public async Task AddAsync(T entity)
            => await _collection.InsertOneAsync(entity);

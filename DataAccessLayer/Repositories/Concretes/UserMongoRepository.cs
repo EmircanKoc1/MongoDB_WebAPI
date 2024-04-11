@@ -2,6 +2,7 @@
 using DataAccessLayer.Entities;
 using DataAccessLayer.Repositories.Abstract;
 using DataAccessLayer.Repositories.Concretes.Base;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace DataAccessLayer.Repositories.Concretes
 {
     public class UserMongoRepository : BaseMongoRepository<User>, IUserMongoRepository
     {
-        public UserMongoRepository(MongoDBContext context) : base(context)
+        public UserMongoRepository(IOptions<Core.Models.SettingModels.MongoDB> options) : base(options)
         {
         }
 

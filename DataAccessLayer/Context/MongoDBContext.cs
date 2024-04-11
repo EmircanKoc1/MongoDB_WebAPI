@@ -1,5 +1,7 @@
-﻿using DataAccessLayer.Entities.Base;
+﻿using Core.Models.SettingModels;
+using DataAccessLayer.Entities.Base;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace DataAccessLayer.Context
@@ -8,10 +10,10 @@ namespace DataAccessLayer.Context
     {
         private readonly IMongoDatabase _database;
 
-        public MongoDBContext(IConfiguration configuration)
+        public MongoDBContext(IOptions<Core.Models.SettingModels.MongoDB> options)
         {
-            IMongoClient client = new MongoClient(configuration.GetConnectionString("MongoDB"));
-            _database = client.GetDatabase(configuration.GetConnectionString("DatabaseName"));
+            IMongoClient client = new MongoClient(options.Value.ConnectionString);
+            _database = client.GetDatabase(options.Value.DatabaseName);
         }
 
         public virtual IMongoCollection<T> GetCollection<T>() where T : BaseEntity

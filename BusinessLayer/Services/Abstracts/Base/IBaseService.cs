@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Services.Abstracts
+namespace BusinessLayer.Services.Abstracts.Base
 {
-    public interface IUserService
+    public interface IBaseService
     {
+
     }
 }

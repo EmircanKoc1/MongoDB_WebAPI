@@ -1,18 +1,13 @@
-﻿using DataAccessLayer.Context;
-using DataAccessLayer.Entities;
+﻿using DataAccessLayer.Entities;
 using DataAccessLayer.Repositories.Abstract;
 using DataAccessLayer.Repositories.Concretes.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace DataAccessLayer.Repositories.Concretes
 {
     public class ProductMongoRepository : BaseMongoRepository<Product>, IProductMongoRepository
     {
-        public ProductMongoRepository(MongoDBContext context) : base(context)
+        public ProductMongoRepository(IOptions<Core.Models.SettingModels.MongoDB> options) : base(options)
         {
         }
     }

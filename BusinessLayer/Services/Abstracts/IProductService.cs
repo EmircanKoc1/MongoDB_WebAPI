@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Services.Abstracts
 {
-    internal interface IProductService
+    public interface IProductService
     {
+
     }
 }

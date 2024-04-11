@@ -1,6 +1,8 @@
+using Core.Models.SettingModels;
 using DataAccessLayer.Context;
 using DataAccessLayer.Repositories.Abstract;
 using DataAccessLayer.Repositories.Concretes;
+using Microsoft.Extensions.Options;
 
 namespace MongoDB_WebAPI
 {
@@ -15,11 +17,15 @@ namespace MongoDB_WebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddSingleton<MongoDBContext>(c => new MongoDBContext(builder.Configuration));
 
             builder.Services.AddScoped<IUserMongoRepository,UserMongoRepository>();
             builder.Services.AddScoped<IProductMongoRepository,ProductMongoRepository>();
+            //builder.Services.AddScoped<>
 
+
+            builder.Services.Configure<Core.Models.SettingModels.MongoDB>(builder.Configuration.GetSection("MongoDB")); 
+
+           
 
             var app = builder.Build();
 
