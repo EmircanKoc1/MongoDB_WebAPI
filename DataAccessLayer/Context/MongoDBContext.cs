@@ -6,7 +6,7 @@ namespace DataAccessLayer.Context
 {
     public class MongoDBContext
     {
-        IMongoDatabase _database;
+        private readonly IMongoDatabase _database;
 
         public MongoDBContext(IConfiguration configuration)
         {

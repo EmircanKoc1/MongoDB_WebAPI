@@ -66,5 +66,11 @@ namespace DataAccessLayer.Repositories.Concretes.Base
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate)
             => _collection.AsQueryable().Where(predicate).ToList();
 
+        public async Task<IEnumerable<T>> GetAllOrdered(FilterDefinition<T> filter,
+            SortDefinition<T> sortDefinition)
+        => await _collection
+                .Find(filter)
+                .Sort(sortDefinition)
+                .ToListAsync();
     }
 }

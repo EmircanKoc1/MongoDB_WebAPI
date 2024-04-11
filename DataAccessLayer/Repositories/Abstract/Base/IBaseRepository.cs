@@ -15,6 +15,6 @@ namespace DataAccessLayer.Repositories.Abstract.Base
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(string id);
         Task<T> UpdateOneAsync(Expression<Func<T, bool>> filter, T entity);
-        IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate)
+        IEnumerable<T> GetAll(Expression<Func<T, bool>> predicate);
     }
 }
