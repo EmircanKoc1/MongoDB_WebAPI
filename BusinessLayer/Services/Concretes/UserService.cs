@@ -33,11 +33,27 @@ namespace BusinessLayer.Services.Concretes
             if (foundedEntity is null)
                 ExceptionHelper.ThrowException(ExceptionTypes.EntityNotFoundException);
 
-            await _repository.DeleteOneAsync(x => x.ObjectId == foundedEntity.ObjectId);
+            await _repository.DeleteOneAsync(x => x.Id == foundedEntity.Id);
 
             return foundedEntity.Adapt<UserReadDto>();
 
         }
+
+        public async Task<UserReadDto> DeleteOneByIdAsync(UserDeleteDto dto)
+        {
+
+            var foundedEntity = await _repository.GetByIdAsync(dto.Id);
+
+            if (foundedEntity is null)
+                ExceptionHelper.ThrowException(ExceptionTypes.EntityNotFoundException);
+
+            await _repository.DeleteOneAsync(x => x.Id == foundedEntity.Id);
+
+            return foundedEntity.Adapt<UserReadDto>();
+
+        }
+
+        
 
         public IEnumerable<UserReadDto> GetAll()
         {
@@ -70,9 +86,9 @@ namespace BusinessLayer.Services.Concretes
         {
             var mongoEntity = dto.Adapt<User>();
             
-            mongoEntity.ObjectId = ObjectId.Parse(id);
+            mongoEntity.Id = ObjectId.Parse(id);
 
-            var result = await _repository.UpdateOneAsync(x => x.ObjectId == mongoEntity.ObjectId, mongoEntity);
+            var result = await _repository.UpdateOneAsync(x => x.Id == mongoEntity.Id, mongoEntity);
 
             return result.Adapt<UserReadDto>();
         }

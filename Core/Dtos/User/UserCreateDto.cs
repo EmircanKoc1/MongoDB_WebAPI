@@ -1,4 +1,6 @@
 ﻿using Core.Dtos.Base;
+using Core.Dtos.Internal;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +11,10 @@ namespace Core.Dtos.User
 {
     public class UserCreateDto : BaseDto
     {
+        public string Username { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public Contact Contact { get; set; }
+        ICollection<Address> Addresses { get; set; }
     }
 }

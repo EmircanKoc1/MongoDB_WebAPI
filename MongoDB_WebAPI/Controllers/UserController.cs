@@ -1,6 +1,5 @@
 ﻿using BusinessLayer.Services.Abstracts;
-using DataAccessLayer.Entities;
-using DataAccessLayer.Repositories.Abstract;
+using Core.Dtos.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MongoDB_WebAPI.Controllers
@@ -9,11 +8,9 @@ namespace MongoDB_WebAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserMongoRepository _repository;
         private readonly IUserService _userService;
-        public UserController(IUserMongoRepository repository, IUserService userService)
+        public UserController(IUserService userService)
         {
-            _repository = repository;
             _userService = userService;
         }
 
@@ -22,25 +19,28 @@ namespace MongoDB_WebAPI.Controllers
             => Ok(await _userService.GetAllAsync());
 
         [HttpGet("[action]/{id}")]
-        public async Task<IActionResult> GetByIdAsync(string id)
-            => Ok(await _repository.GetByIdAsync(id));
-
+        public async Task<IActionResult> GetByIdAsync([FromRoute] string id)
+            => Ok(await _userService.GetByIdAsync(id));
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Add([FromBody] User entity)
+        public async Task<IActionResult> Add([FromBody] UserCreateDto dto)
         {
-            await _repository.AddAsync(entity);
+            await _userService.AddAsync(dto);
             return Ok();
         }
 
-        [HttpPut("[action]")]
-        public async Task<IActionResult> Update([FromBody] User entity)
-        {
-            var foundedUser = await _repository.UpdateOneAsync(x => x.UserName == entity.UserName, entity);
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> Update([FromRoute] string id, [FromBody] UserUpdateDto dto)
+            => Ok(await _userService.UpdateOneByIdAsync(id, dto));
 
-            return Ok(foundedUser);
 
-        }
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> DeleteById([FromRoute] string id)
+            => Ok(await _userService.DeleteOneByIdAsync(id));
+
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Delete([FromBody] UserDeleteDto dto)
+           => Ok(await _userService.DeleteOneByIdAsync(dto));
 
     }
 }

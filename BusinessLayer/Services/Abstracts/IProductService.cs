@@ -12,6 +12,7 @@ namespace BusinessLayer.Services.Abstracts
     {
         Task AddAsync(ProductCreateDto dto);
         Task<ProductReadDto> DeleteOneByIdAsync(string id);
+        Task<ProductReadDto> DeleteOneByIdAsync(ProductDeleteDto dto);
         Task<IEnumerable<ProductReadDto>> GetAllAsync();
         Task<ProductReadDto> GetByIdAsync(string id);
         Task<ProductReadDto> UpdateOneByIdAsync(string id , ProductUpdateDto dto);

@@ -1,12 +1,9 @@
 ﻿using Core.Dtos.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.Bson;
 namespace Core.Dtos.User
 {
     public class UserDeleteDto : BaseDto
     {
+        public ObjectId Id { get; set; }
     }
 }

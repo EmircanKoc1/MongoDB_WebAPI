@@ -1,13 +1,10 @@
 ﻿using Core.Dtos.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Core.Dtos.Product
 {
     public class ProductDeleteDto : BaseDto
-    { 
+    {
+        public ObjectId Id { get; set; }
     }
 }

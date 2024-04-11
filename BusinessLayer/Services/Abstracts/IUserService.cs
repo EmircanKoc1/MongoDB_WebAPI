@@ -12,6 +12,7 @@ namespace BusinessLayer.Services.Abstracts
     {
         Task AddAsync(UserCreateDto dto);
         Task<UserReadDto> DeleteOneByIdAsync(string id);
+        Task<UserReadDto> DeleteOneByIdAsync(UserDeleteDto dto);
         Task<IEnumerable<UserReadDto>> GetAllAsync();
         Task<UserReadDto> GetByIdAsync(string id);
         Task<UserReadDto> UpdateOneByIdAsync(string id, UserUpdateDto dto);

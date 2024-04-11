@@ -1,4 +1,5 @@
 ﻿using Core.Dtos.Base;
+using Core.Dtos.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,6 @@ namespace Core.Dtos.Product
         public int Price { get; set; }
         public Category Category { get; set; }
     }
-    public class Category
-    {
-        public string Name { get; set; }
-    }
+    
 
 }

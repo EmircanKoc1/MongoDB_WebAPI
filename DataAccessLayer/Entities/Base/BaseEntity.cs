@@ -13,7 +13,7 @@ namespace DataAccessLayer.Entities.Base
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement(Order = 0)]
-        public ObjectId ObjectId { get; set; }
+        public ObjectId Id { get; set; }
 
 
         [BsonRepresentation(BsonType.DateTime)]

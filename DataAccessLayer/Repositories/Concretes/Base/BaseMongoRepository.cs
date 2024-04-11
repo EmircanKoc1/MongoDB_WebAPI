@@ -43,10 +43,10 @@ namespace DataAccessLayer.Repositories.Concretes.Base
         }
 
         public async Task<T> GetByIdAsync(string id)
-            => await (await _collection.FindAsync(x => x.ObjectId == ObjectId.Parse(id))).FirstOrDefaultAsync();
+            => await (await _collection.FindAsync(x => x.Id == ObjectId.Parse(id))).FirstOrDefaultAsync();
 
         public async Task<T> GetByIdAsync(ObjectId id)
-            => await (await _collection.FindAsync(x => x.ObjectId == id)).FirstOrDefaultAsync();
+            => await (await _collection.FindAsync(x => x.Id == id)).FirstOrDefaultAsync();
 
         public async Task<T> UpdateOneAsync(Expression<Func<T, bool>> filter, T entity)
             => await _collection.FindOneAndReplaceAsync(filter, entity);
