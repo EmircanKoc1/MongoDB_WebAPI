@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Entities;
+﻿using BusinessLayer.Services.Abstracts;
+using DataAccessLayer.Entities;
 using DataAccessLayer.Repositories.Abstract;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +10,16 @@ namespace MongoDB_WebAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserMongoRepository _repository;
-
-        public UserController(IUserMongoRepository repository)
+        private readonly IUserService _userService;
+        public UserController(IUserMongoRepository repository, IUserService userService)
         {
             _repository = repository;
+            _userService = userService;
         }
 
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAll()
-            => Ok(await _repository.GetAllAsync());
+            => Ok(await _userService.GetAllAsync());
 
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetByIdAsync(string id)

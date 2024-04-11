@@ -12,7 +12,7 @@ namespace DataAccessLayer.Entities
         [BsonRepresentation(BsonType.String)]
         public string City { get; set; }
         [BsonRepresentation(BsonType.String)]
-        public string town { get; set; }
+        public string Town { get; set; }
     }
 
 }

@@ -10,12 +10,12 @@ namespace BusinessLayer.Services.Abstracts
 {
     public interface IUserService
     {
-        Task AddAsync(UserCreateDto entity);
-        Task<UserReadDto> DeleteOneByIdAsync();
+        Task AddAsync(UserCreateDto dto);
+        Task<UserReadDto> DeleteOneByIdAsync(string id);
         Task<IEnumerable<UserReadDto>> GetAllAsync();
         Task<UserReadDto> GetByIdAsync(string id);
-        Task<UserReadDto> UpdateOneByIdAsync();
-        Task<UserReadDto> UpdateOneByNameAsync();
+        Task<UserReadDto> UpdateOneByIdAsync(string id, UserUpdateDto dto);
         IEnumerable<UserReadDto> GetAll();
+
     }
 }

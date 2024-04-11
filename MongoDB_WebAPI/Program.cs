@@ -1,3 +1,5 @@
+using BusinessLayer.Services.Abstracts;
+using BusinessLayer.Services.Concretes;
 using Core.Models.SettingModels;
 using DataAccessLayer.Context;
 using DataAccessLayer.Repositories.Abstract;
@@ -20,7 +22,8 @@ namespace MongoDB_WebAPI
 
             builder.Services.AddScoped<IUserMongoRepository,UserMongoRepository>();
             builder.Services.AddScoped<IProductMongoRepository,ProductMongoRepository>();
-            //builder.Services.AddScoped<>
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<IUserService , UserService>();
 
 
             builder.Services.Configure<Core.Models.SettingModels.MongoDB>(builder.Configuration.GetSection("MongoDB")); 
