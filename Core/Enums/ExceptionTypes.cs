@@ -10,6 +10,7 @@ namespace Core.Enums
     {
         EntityNotFoundException,
         EntityAlreadyExistsException,
-        DefaultException
+        DefaultException,
+        ModelValidationException
     }
 }

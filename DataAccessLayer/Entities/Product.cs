@@ -15,7 +15,6 @@ namespace DataAccessLayer.Entities
         public int Price { get; set; }
 
         [BsonElement(Order = 4)]
-        [BsonRepresentation(BsonType.Document)]
         public Category Category { get; set; }
 
     }

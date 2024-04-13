@@ -8,7 +8,7 @@ namespace DataAccessLayer.Entities
     {
         [BsonElement(Order = 2)]
         [BsonRepresentation(BsonType.String)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [BsonRepresentation(BsonType.String)]
         [BsonElement(Order = 3)]

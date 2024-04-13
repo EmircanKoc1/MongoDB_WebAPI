@@ -1,17 +1,37 @@
-﻿
+﻿using Core.Extensions;
+using FluentValidation.Results;
+
 namespace Presentation.API.CustomMiddlewares
 {
-    public class ExceptionHandlerMiddleware : IMiddleware
+    public class ExceptionHandlerMiddleware 
     {
-        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+        RequestDelegate _next;
+
+        public ExceptionHandlerMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+
+        public async Task Invoke(HttpContext context)
         {
 
 
 
+            try
+            {
+                await _next.Invoke(context);
+
+            }
+            catch (Exception ex )
+            {
+                context.Response.ContentType = "application/json";
+                context.Response.WriteAsync(ex.Message);
+                
+            }
 
 
 
-            await next.Invoke(context);
 
 
 

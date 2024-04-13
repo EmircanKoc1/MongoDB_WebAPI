@@ -25,6 +25,9 @@ namespace MongoDB_WebAPI.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Add([FromBody] UserCreateDto dto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             await _userService.AddAsync(dto);
             return Ok();
         }

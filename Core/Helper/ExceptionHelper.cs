@@ -5,15 +5,16 @@ namespace Core.Helper
 {
     public static class ExceptionHelper
     {
-        public static void ThrowException(ExceptionTypes exceptionType = ExceptionTypes.DefaultException)
+        public static void ThrowException(ExceptionTypes exceptionType = ExceptionTypes.DefaultException, string message = "Message not defined")
         {
 
             throw exceptionType switch
             {
-                ExceptionTypes.EntityAlreadyExistsException => new EntityAlreadyExistsException(),
-                ExceptionTypes.EntityNotFoundException => new EntityNotFoundException(),
-                ExceptionTypes.DefaultException => new DefaultException("DefaultException"),
-                _ => new DefaultException("DefaultException")
+                ExceptionTypes.EntityAlreadyExistsException => new EntityAlreadyExistsException(message),
+                ExceptionTypes.EntityNotFoundException => new EntityNotFoundException(message),
+                ExceptionTypes.DefaultException => new DefaultException(message),
+                ExceptionTypes.ModelValidationException => new ModelValidationException(message),
+                _ => new DefaultException(message)
             };
 
         }

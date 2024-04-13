@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Services.Abstracts;
 using Core.Dtos.User;
 using Core.Enums;
+using Core.Extensions;
 using Core.Helper;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Repositories.Abstract;
+using FluentValidation;
 using Mapster;
 using MongoDB.Bson;
 
@@ -12,14 +14,28 @@ namespace BusinessLayer.Services.Concretes
     public class UserService : IUserService
     {
         IUserMongoRepository _repository;
-
-        public UserService(IUserMongoRepository repository)
+        IValidator<UserCreateDto> _createValidator;
+        IValidator<UserUpdateDto> _updateValidator;
+        public UserService(IUserMongoRepository repository, IValidator<UserCreateDto> createValidator, IValidator<UserUpdateDto> updateValidator)
         {
             _repository = repository;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public async Task AddAsync(UserCreateDto dto)
         {
+            var validationResult = _createValidator.Validate(dto);
+
+            if (!validationResult.IsValid)
+            {
+
+                ExceptionHelper.ThrowException(
+                    exceptionType: ExceptionTypes.ModelValidationException,
+                    message: validationResult.ErrorsToDictionary().Serialize());
+            }
+
+
             var mongoEntity = dto.Adapt<User>();
 
             await _repository.AddAsync(mongoEntity);
@@ -53,7 +69,6 @@ namespace BusinessLayer.Services.Concretes
 
         }
 
-        
 
         public IEnumerable<UserReadDto> GetAll()
         {
@@ -84,8 +99,18 @@ namespace BusinessLayer.Services.Concretes
 
         public async Task<UserReadDto> UpdateOneByIdAsync(string id, UserUpdateDto dto)
         {
+            var validationResult = await _updateValidator.ValidateAsync(dto);
+
+            if (!validationResult.IsValid)
+            {
+                ExceptionHelper.ThrowException(
+                    exceptionType: ExceptionTypes.ModelValidationException,
+                    message: validationResult.ErrorsToDictionary().Serialize());
+            }
+
+
             var mongoEntity = dto.Adapt<User>();
-            
+
             mongoEntity.Id = ObjectId.Parse(id);
 
             var result = await _repository.UpdateOneAsync(x => x.Id == mongoEntity.Id, mongoEntity);
